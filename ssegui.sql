@@ -44,7 +44,7 @@ CREATE TABLE `actividadusuario` (
 
 LOCK TABLES `actividadusuario` WRITE;
 /*!40000 ALTER TABLE `actividadusuario` DISABLE KEYS */;
-INSERT INTO `actividadusuario` VALUES (1,'hilaquita@hotmail.com','8cb2237d0679ca88db6464eac60da96345513964',NULL,1,'2015-03-11',1),(2,'maya@hotmail.com','12345',NULL,1,'2015-03-12',2),(3,'paul@hotmail.com','1111',NULL,1,'2015-04-18',3);
+INSERT INTO `actividadusuario` VALUES (1,'hilaquita@hotmail.com','8cb2237d0679ca88db6464eac60da96345513964',NULL,1,'2015-03-11',1),(2,'maya@hotmail.com','8cb2237d0679ca88db6464eac60da96345513964',NULL,1,'2015-03-12',2),(3,'paul@hotmail.com','8cb2237d0679ca88db6464eac60da96345513964',NULL,1,'2015-04-18',3);
 /*!40000 ALTER TABLE `actividadusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `cite` (
   PRIMARY KEY (`id`),
   KEY `fk_acron_estruc` (`idestructura`),
   CONSTRAINT `fk_acron_estruc` FOREIGN KEY (`idestructura`) REFERENCES `estructura` (`idforaneo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `cite` (
 
 LOCK TABLES `cite` WRITE;
 /*!40000 ALTER TABLE `cite` DISABLE KEYS */;
-INSERT INTO `cite` VALUES (1,1,'INIAF-DGE',0,'Orden Estructura',1),(2,4,'INIAF-DGE-UP',0,'Orden Estructura',1);
+INSERT INTO `cite` VALUES (1,1,'INIAF-DGE',0,'Orden Estructura',1),(2,4,'INIAF-DGE-UP',0,'Orden Estructura',1),(3,17,'ALGO',2015,'custom',1),(4,7,'OTRA',0,'estructura',1),(5,2,'INIAF-DGE-UPS',9,'estructura',1);
 /*!40000 ALTER TABLE `cite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,9 +156,9 @@ CREATE TABLE `concopia` (
   PRIMARY KEY (`id`),
   KEY `fk_cc_doc` (`iddocumento`),
   KEY `fk_cc_usua` (`idactividadusuario`),
-  CONSTRAINT `fk_cc_usua` FOREIGN KEY (`idactividadusuario`) REFERENCES `actividadusuario` (`id`),
-  CONSTRAINT `fk_cc_doc` FOREIGN KEY (`iddocumento`) REFERENCES `documento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_cc_doc` FOREIGN KEY (`iddocumento`) REFERENCES `documento` (`id`),
+  CONSTRAINT `fk_cc_usua` FOREIGN KEY (`idactividadusuario`) REFERENCES `actividadusuario` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `concopia` (
 
 LOCK TABLES `concopia` WRITE;
 /*!40000 ALTER TABLE `concopia` DISABLE KEYS */;
-INSERT INTO `concopia` VALUES (6,2,1),(9,1,1);
+INSERT INTO `concopia` VALUES (9,1,1),(10,22,3),(11,25,3),(12,26,3),(13,27,3),(15,28,3),(17,29,3),(18,31,3),(19,32,3);
 /*!40000 ALTER TABLE `concopia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,7 @@ CREATE TABLE `destinatario` (
   KEY `fk_dest_doc` (`iddocumento`),
   CONSTRAINT `fk_dest_doc` FOREIGN KEY (`iddocumento`) REFERENCES `documento` (`id`),
   CONSTRAINT `fk_dest_usua` FOREIGN KEY (`idactividadusuario`) REFERENCES `actividadusuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +225,7 @@ CREATE TABLE `destinatario` (
 
 LOCK TABLES `destinatario` WRITE;
 /*!40000 ALTER TABLE `destinatario` DISABLE KEYS */;
-INSERT INTO `destinatario` VALUES (4,13,1),(5,13,2),(6,14,2),(7,15,2),(10,17,2),(11,17,1),(12,18,2),(20,2,1),(21,2,2),(24,1,3);
+INSERT INTO `destinatario` VALUES (4,13,1),(5,13,2),(6,14,2),(7,15,2),(10,17,2),(11,17,1),(12,18,2),(24,1,3),(25,22,2),(26,25,2),(27,26,2),(28,27,2),(30,28,2),(33,29,2),(34,29,3),(35,33,1),(37,34,3);
 /*!40000 ALTER TABLE `destinatario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `documento` (
   CONSTRAINT `fk_doc_format` FOREIGN KEY (`idformato`) REFERENCES `formato` (`id`),
   CONSTRAINT `fk_doc_tipodoc` FOREIGN KEY (`idtipodocumento`) REFERENCES `tipodocumento` (`id`),
   CONSTRAINT `fk_doc_user` FOREIGN KEY (`idusuario`) REFERENCES `actividadusuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `documento` (
 
 LOCK TABLES `documento` WRITE;
 /*!40000 ALTER TABLE `documento` DISABLE KEYS */;
-INSERT INTO `documento` VALUES (1,1,1,1,'local','2015-08-04 00:00:00','SC','2015-04-14 08:10:21','INIAF-20','Favor responder a la nota enviada','<p><strong>EStimados selres</strong></p>\r\n<p>&nbsp;</p>\r\n<p>afasdfasdfasdf</p>',1,'muchos anexos',1,'1'),(2,1,1,1,'localhost','2015-08-04 00:00:00','LP','2015-04-14 16:04:08','asdaafds','asdfasdf','<p>asdfasdf asda asd asd</p>\r\n<p>as asd</p>\r\n<p>&nbsp;asd</p>\r\n<p>&nbsp;</p>',0,'anexos',0,'1'),(4,1,1,1,'localhost','0000-00-00 00:00:00','LP','2015-04-16 14:04:28','adfa sdfasdf','sadf asdf asdf','<p>asdfa sdfasd fasdf</p>',2,'anexos',0,'1'),(5,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:21','adfasd','asdfasdf','<p>asdf sda fasdf</p>',1,'anexos',0,'1'),(6,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:13','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(7,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:42','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(8,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:28','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(9,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:49','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(10,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:09','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(11,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:45','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(12,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:25','asdfas','sdfasdf','<p>asdfasd</p>',2,'anexos',0,'1'),(13,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:51','adfa sdfasd fasdf','asdfasd fasd fasdf','<p>sdfasd fasdfa sdfasdf asdfasd</p>',2,'anexos',0,'1'),(14,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-16 14:04:27','asd fasdfasdf','asdf asdfasdf','<p>asdf asdfasd fasdf asdfasd</p>',3,'anexos',0,'1'),(15,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-16 14:04:07','weqrw qweq r','asdfa asfasdfa sd fasdf','<p>asdf asdf asdf asdfa sf</p>',2,'asdf asdasdf',1,'1'),(16,1,1,1,'localhost','0000-00-00 00:00:00','LP','2015-04-16 20:04:09','wilmer','la paz','<p>Wilmer</p>',10,'cd libro y otros',1,'1'),(17,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-17 00:04:11','asfasdf','asdf sdaf asdf asdf asd fasdf asdf asdfasdf asdfasdfasdf asdfasd fasdfasdfasdf asdfa sdfasd fasdfa sdfasd fasdf','<p>asdf asd fasd fasdfa sdf</p>',3,'asdf asd fasdf',1,'1'),(18,1,1,1,'localhost','2015-07-04 00:00:00','LP','2015-04-17 00:04:55','asdfasd','asdfasdf ','<p>asdfas asd</p>',2,'asdf asd fasd',1,'1');
+INSERT INTO `documento` VALUES (1,1,1,1,'local','2015-08-04 00:00:00','SC','2015-04-14 08:10:21','INIAF-20','Favor responder a la nota enviada','<p><strong>EStimados selres</strong></p>\r\n<p>&nbsp;</p>\r\n<p>afasdfasdfasdf</p>',1,'muchos anexos',1,'1'),(5,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:21','adfasd','asdfasdf','<p>asdf sda fasdf</p>',1,'anexos',0,'1'),(6,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:13','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(9,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:49','asdf','asdf','<p>asdf as fasd</p>',2,'anexos',0,'1'),(12,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:25','asdfas','sdfasdf','<p>asdfasd</p>',2,'anexos',0,'1'),(13,1,1,1,'localhost','2015-01-04 00:00:00','LP','2015-04-16 14:04:51','adfa sdfasd fasdf','asdfasd fasd fasdf','<p>sdfasd fasdfa sdfasdf asdfasd</p>',2,'anexos',0,'1'),(14,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-16 14:04:27','asd fasdfasdf','asdf asdfasdf','<p>asdf asdfasd fasdf asdfasd</p>',3,'anexos',0,'1'),(15,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-16 14:04:07','weqrw qweq r','asdfa asfasdfa sd fasdf','<p>asdf asdf asdf asdfa sf</p>',2,'asdf asdasdf',1,'1'),(16,1,1,1,'localhost','0000-00-00 00:00:00','LP','2015-04-16 20:04:09','wilmer','la paz','<p>Wilmer</p>',10,'cd libro y otros',1,'1'),(17,1,1,1,'localhost','2015-06-04 00:00:00','LP','2015-04-17 00:04:11','asfasdf','asdf sdaf asdf asdf asd fasdf asdf asdfasdf asdfasdfasdf asdfasd fasdfasdfasdf asdfa sdfasd fasdfa sdfasd fasdf','<p>asdf asd fasd fasdfa sdf</p>',3,'asdf asd fasdf',1,'1'),(18,1,1,1,'localhost','2015-07-04 00:00:00','LP','2015-04-17 00:04:55','asdfasd','asdfasdf ','<p>asdfas asd</p>',2,'asdf asd fasd',1,'1'),(22,1,1,1,'localhost','2015-02-04 00:00:00','SC','2015-04-20 12:04:10','<sd<s','adfasd','<p>asdfasd</p>',2,'asdfasdf',1,'1'),(25,1,1,1,'localhost','2015-02-04 00:00:00','SC','2015-04-21 15:04:13','INIAF-DGE-UPS-1','asdf asafsda f','<p>asdfa dfasd fasdf</p>',2,'asdf sdfasd f',1,'1'),(26,1,1,1,'localhost','2015-01-04 00:00:00','SC','2015-04-23 22:04:33','INIAF-DGE-UPS-1','asdfasdf','<p>asdfasdf</p>',1,'asdf adf',1,'1'),(27,1,1,1,'localhost','2015-01-04 00:00:00','OR','2015-04-23 22:04:57','INIAF-DGE-UPS-1','asdasdfsdf','<p>asdf asdf asdf asdf asdf</p>',1,'asdfa df',1,'1'),(28,2,2,1,'localhost','2015-01-04 00:00:00','LP','2015-04-23 23:04:39','INIAF-DGE-UPS-2','wilmer','<p>Wilmer Wilmer Wilmer Wilmer Wilmer Wilmer </p>',2,'Wilmer',1,'1'),(29,2,2,1,'localhost','2015-03-04 00:00:00','CH','2015-04-23 23:04:09','INIAF-DGE-UPS-3','Informes en avance','<p>Licenciado:</p>\r\n<p>Mediante la presente quiero depositar en su constancia respecto a los fondos en avance a la fecha.</p>\r\n<p>Comunicarle que en todos los tramos vencidos, se lleg&oacute; a controlar todo movimiento establecido en diferentes secciones y eventos realizados seg&uacute;n el programa de gobierno.</p>\r\n<p>Si m&aacute;s que decirle me despido</p>',1,'Fotocopia de Listas, ',1,'1'),(30,4,3,1,'localhost','2015-03-04 00:00:00','','2015-04-23 23:04:09','INIAF-DGE-UPS-4','Comunicado a todo el personal','<p>Se comunica a todo el personal que el d&iacute;a 21 de Febreo el horario de trabajo es continu, favor tomar de su consideraci&oacute;n</p>\r\n<p style=\"text-align: right;\"><em>asdfasdf</em></p>\r\n<p style=\"text-align: right;\"><em>asd</em></p>\r\n<p>f a</p>\r\n<p><strong>sd</strong></p>',0,'',0,'1'),(31,2,2,1,'localhost','2015-04-23 00:00:00','','2015-04-24 10:04:14','INIAF-DGE-UPS-5','Inclusión de un nuevo Reglamento y su aplicación a partir del 02 de Mayo','<p>A todo el personal:</p>\r\n<p>Mediante el decreso ministeria nro MDRYT-DESP-003, se instruye a todas la unidades concentradas y desconcentradas modificar el reglamento y aplicaci&oacute;n</p>',0,'',0,'1'),(32,4,4,1,'localhost','2015-04-11 00:00:00','','2015-04-24 10:04:21','INIAF-DGE-UPS-6','Segunda prueba','<p>asdfasdf asd adf asd fadf adfa sdfasdf asd fad</p>',0,'',0,'1'),(33,1,1,1,'localhost','2015-04-03 00:00:00','TA','2015-04-24 10:04:57','INIAF-DGE-UPS-7','s asdfas df','<p>asdfa sdfas fasfasdf</p>',0,'',0,'1'),(34,5,5,1,'localhost','2015-04-08 00:00:00','PO','2015-04-24 10:04:23','INIAF-DGE-UPS-8','Proceso Administrativo','<p>asdfa sdaf</p>',0,'',0,'1'),(35,3,3,1,'localhost','2015-04-16 00:00:00','','2015-04-24 18:04:17','INIAF-DGE-UPS-9','COMUNICADO URGENTE AL PERSONAL','<p>SE COMUNICA TODO EL PERSON QUE LAS ACTIVIDADES DEL D&Iacute;A DE HOY SE SUSPENDEN POR LAS MARCHAS REALIZADAS POR LOS MIGRANTES EN NUESTRA INSTITUCI&Oacute;N.</p>\r\n<p>ATENTAMENTE.</p>',0,'',0,'1');
 /*!40000 ALTER TABLE `documento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,6 +356,31 @@ CREATE TABLE `instruccion` (
 LOCK TABLES `instruccion` WRITE;
 /*!40000 ALTER TABLE `instruccion` DISABLE KEYS */;
 /*!40000 ALTER TABLE `instruccion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lugar`
+--
+
+DROP TABLE IF EXISTS `lugar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lugar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lugar` varchar(200) DEFAULT NULL,
+  `estado` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lugar`
+--
+
+LOCK TABLES `lugar` WRITE;
+/*!40000 ALTER TABLE `lugar` DISABLE KEYS */;
+INSERT INTO `lugar` VALUES (1,'La Paz',1);
+/*!40000 ALTER TABLE `lugar` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -457,7 +482,7 @@ CREATE TABLE `recurso` (
   `fregistro` date DEFAULT NULL,
   `link` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -466,7 +491,7 @@ CREATE TABLE `recurso` (
 
 LOCK TABLES `recurso` WRITE;
 /*!40000 ALTER TABLE `recurso` DISABLE KEYS */;
-INSERT INTO `recurso` VALUES (1,'index',NULL,'Wilmer',0,0,'2015-03-15','index.php'),(2,'admin',NULL,'Administración',0,0,'2015-03-15','·#'),(3,'cargos','index','Cargos',2,0,'2015-03-15',NULL),(4,'usuarios','index','Usuarios',2,0,'2015-03-15',NULL),(5,'documentos','index','Documentos',0,0,NULL,NULL),(6,'logout','index','Salir',0,20,'2015-04-09',''),(7,'bandejas','index','Bandejas',5,0,'2015-04-13',NULL),(8,'cite','index','Cites',2,0,'2015-04-18',NULL);
+INSERT INTO `recurso` VALUES (1,'index',NULL,'Wilmer',0,0,'2015-03-15','index.php'),(2,'admin',NULL,'Administración',0,0,'2015-03-15','·#'),(3,'cargos','index','Cargos',2,0,'2015-03-15',NULL),(4,'usuarios','index','Usuarios',2,0,'2015-03-15',NULL),(5,'documentos','index','Documentos',0,0,NULL,NULL),(6,'logout','index','Salir',0,20,'2015-04-09',''),(7,'bandejas','index','Bandejas',5,0,'2015-04-13',NULL),(8,'cite','index','Cites',2,0,'2015-04-18',NULL),(9,'lugar','index','Lugar',2,0,NULL,NULL);
 /*!40000 ALTER TABLE `recurso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,7 +511,7 @@ CREATE TABLE `remitente` (
   KEY `fk_remit_doc` (`iddocumento`),
   CONSTRAINT `fk_remit_doc` FOREIGN KEY (`iddocumento`) REFERENCES `documento` (`id`),
   CONSTRAINT `fk_remit_usua` FOREIGN KEY (`idactividadusuario`) REFERENCES `actividadusuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,7 +520,7 @@ CREATE TABLE `remitente` (
 
 LOCK TABLES `remitente` WRITE;
 /*!40000 ALTER TABLE `remitente` DISABLE KEYS */;
-INSERT INTO `remitente` VALUES (2,12,1),(3,12,2),(4,13,1),(5,14,1),(6,15,1),(15,2,2),(19,1,1);
+INSERT INTO `remitente` VALUES (2,12,1),(3,12,2),(4,13,1),(5,14,1),(6,15,1),(19,1,1),(20,22,1),(21,25,1),(22,26,1),(23,27,1),(25,28,1),(27,29,1),(31,30,3),(32,31,1),(34,32,1),(35,33,2),(37,34,2),(38,35,2);
 /*!40000 ALTER TABLE `remitente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -635,4 +660,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-19  9:58:43
+-- Dump completed on 2015-04-24 19:10:57

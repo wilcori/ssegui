@@ -16,8 +16,8 @@ require_once 'site/menu.php';
           </ul>
           <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newcarta'">Crear carta</button>
           <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newinforme'">Crear informe</button>
+          <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newcomunicado'">Crear comunicado</button>
           <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newcircular'">Crear circular</button>
-          <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newcomunicado'">Crear comuicado</button>
           <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=newmemorandum'">Crear memorandum</button>
           <table class="table table-bordered">
             <thead>
@@ -31,14 +31,20 @@ require_once 'site/menu.php';
               </tr>
             </thead>
             <tbody>
-            <?php foreach($documento as $cargo) {?> 
+            <?php 
+            $c = 0;
+            foreach($documento as $doc) {?> 
               <tr>
-                <td><?php echo $cargo->id; ?></td>
-                <td><?php echo $cargo->documento; ?></td>
-                <td><?php echo $cargo->referencia; ?></td>
-                <td><?php echo $cargo->remite; ?></td>
-                <td><?php echo $cargo->destino; ?></td>
-                <td><button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=editcarta&id=<?=$cargo->id?>'">Editar</button></td>
+                <td><?php echo ++$c; ?></td>
+                <td><?php echo $doc->documento; ?></td>
+                <td><?php echo $doc->referencia; ?></td>
+                <td><?php echo $doc->remite; ?></td>
+                <td><?php echo $doc->destino; ?></td>
+                <td>
+                    <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=documento&action=edit<?php echo strtolower($doc->tipodocumento) ?>&id=<?=$doc->id?>'">Editar</button>
+                    <button class="btn btn-xs btn-primary" onClick="location.href='#'">Enviar</button>
+                    <button class="btn btn-xs btn-primary" onClick="window.open( 'http://<?php echo $_SERVER["SERVER_NAME"]?>//index.php?controller=documento&action=print<?php echo strtolower($doc->tipodocumento) ?>&id=<?=$doc->id?>');">Imprimir</button>
+                </td>
               </tr>
             <?php } ?>              
             </tbody>

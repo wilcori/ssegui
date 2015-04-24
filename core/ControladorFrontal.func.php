@@ -10,6 +10,7 @@ function cargarControlador($controller){
         $strFileController='controller/'.ucwords(CONTROLADOR_DEFECTO).'Controller.php'; 
 
     }
+
     require_once $strFileController;
     $controllerObj=new $controlador();
     return $controllerObj;

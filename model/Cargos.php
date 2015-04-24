@@ -74,6 +74,7 @@ class Cargos extends EntidadBase{
         // $this->db()->error;
         return $save;
     }
+    
     public function update(){
         $query="UPDATE cargos SET 
                 cargo = '".$this->cargo."',

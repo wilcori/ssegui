@@ -210,34 +210,41 @@ class Documento extends EntidadBase{
 
     public function getBandejaSalida(){
         $sql = "select d.id,concat(td.tipodocumento,' - ',DATE_FORMAT(fechahora,'%d/%m/%Y'),'<br>',cite) "
-                . "as documento,referencia from documento d join tipodocumento td on d.idtipodocumento = td.id "
-                . ";";
+                . "as documento,referencia,td.tipodocumento from documento d join tipodocumento td on d.idtipodocumento = td.id "
+                . "ORDER BY d.id DESC;";
         $carta = $this->ejecutarSql($sql);
         return $carta;
     }
     
     public function getRemitente($id){
-        $sql = "select au.id, nombres,apellidos from documento d "
+        $sql = "select au.id, nombres,apellidos,c.cargo from documento d "
                 . "join remitente r on r.iddocumento = d.id "
                 . "join actividadusuario au on au.id = r.idactividadusuario "
+                . "join antiguedad a on a.idactividadusuario = au.id "
+                . "join cargos c on c.id = a.idcargo "
                 . "join usuarios u on u.id  = au.idusuarios where d.id = ".$id;
         $remit = $this->ejecutarSql($sql);
         return $remit;
     }
     
     public function getDestinatario($id){
-        $sql = "select au.id, nombres,apellidos from documento d "
+        $sql = "select au.id, nombres,apellidos, c.cargo from documento d "
                 . "join destinatario de on de.iddocumento = d.id "
                 . "join actividadusuario au on au.id = de.idactividadusuario "
+                . "join antiguedad a on a.idactividadusuario = au.id "
+                . "join cargos c on c.id = a.idcargo "
                 . "join usuarios u on u.id  = au.idusuarios where d.id = ".$id;
+//        echo $sql;
         $dest = $this->ejecutarSql($sql);
         return $dest;
     }
 
     public function getConcopia($id){
-        $sql = "select au.id, nombres,apellidos from documento d "
+        $sql = "select au.id, nombres,apellidos,c.cargo from documento d "
                 . "join concopia cc on cc.iddocumento = d.id "
                 . "join actividadusuario au on au.id = cc.idactividadusuario "
+                . "join antiguedad a on a.idactividadusuario = au.id "
+                . "join cargos c on c.id = a.idcargo "                
                 . "join usuarios u on u.id  = au.idusuarios where d.id = ".$id;
         $dest = $this->ejecutarSql($sql);
         return $dest;
@@ -260,11 +267,24 @@ class Documento extends EntidadBase{
 //        $dest = $this->ejecutarSql($sql);
 //        return $dest;
 //    }
-
+    //Retorna el último ID registrado en la tabla Documento
     public function getIdidentity(){
         $sql = "select max(id) as id from documento";
         $id = $this->ejecutarSql($sql);
         return $id[0]->id;
     }
+    
+    public function getCiteExistDoc($id){
+        $sql = "select concat(ct.acronimo,'-',ct.contador+1) as acronimo from antiguedad a join actividadusuario au "
+                . "on a.idactividadusuario = au.id join estructura e on e.id = a.idestructura "
+                . "join cite ct on ct.idestructura = e.id where ct.estado = 1 and au.id = ".$id;
+        $cite = $this->ejecutarSql($sql);
+        if(is_array($cite)) {
+            return $cite[0]->acronimo;
+        } else {
+            return false;
+        }
+    }
+    
 }
 ?>

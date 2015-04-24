@@ -4,6 +4,7 @@ class ControladorBase{
     public function __construct() {
         require_once 'EntidadBase.php';
         require_once 'ModeloBase.php';
+//        require_once 'site/fpdf/fpdf.php';
         
         //Incluir todos los modelos
         foreach(glob("model/*.php") as $file){

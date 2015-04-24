@@ -6,7 +6,7 @@ require_once 'site/menu.php';
       <div class="page-header">
         <h1>Usuarios Wilmer</h1>
       </div>
-      <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=usuarios&action=editar&id=<?=$user->id?>'">Crear Nuevo Usuario</button>
+      <button class="btn btn-xs btn-primary" onClick="location.href='index.php?controller=usuarios&action=editar&id=<?php echo $user->id?>'">Crear Nuevo Usuario</button>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered">

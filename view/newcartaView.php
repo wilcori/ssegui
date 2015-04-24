@@ -1,6 +1,10 @@
 <?php
 require_once 'site/header.php';
 require_once 'site/menu.php';
+//$cite = (isset($cite))
+if(!isset($cite)){
+    $cite = '';
+}
 ?>
 
       <div class="page-header">
@@ -29,7 +33,7 @@ require_once 'site/menu.php';
       </div>
       <div class="form-group">
         <label for="cite">Cite:</label>
-        <input type="text" name="cite" value="" class="form-control" id="cite" placeholder="Introduce el Cite" required>
+        <input type="text" name="cite" value="<?php echo $cite ?>" readonly="readonly" class="form-control" id="cite" placeholder="Introduce el Cite" required>
       </div>
     </div>      
     <div class="col-xs-12 col-md-6">
@@ -99,7 +103,11 @@ require_once 'site/menu.php';
 
 </div>
     </form>
-<script>tinymce.init({selector:'textarea'});</script>
+<script>tinymce.init({
+    selector:'textarea',
+    languaje:'es',
+        });
+</script>
 
 <?php
 require_once 'site/foot.php';

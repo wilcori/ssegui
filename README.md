@@ -1,2 +1,0 @@
-# ssegui
-Sistema de Correspondencia

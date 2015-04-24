@@ -29,7 +29,7 @@ require_once 'site/menu.php';
       </div>
       <div class="form-group">
         <label for="cite">Cite:</label>
-        <input type="text" name="cite" value="<?php echo $documento->cite ?>" class="form-control" id="cite" placeholder="Introduce el Cite" required>
+        <input type="text" name="cite" value="<?php echo $documento->cite ?>" readonly="readonly" class="form-control" id="cite" placeholder="Introduce el Cite" required>
       </div>
     </div>      
     <div class="col-xs-12 col-md-6">
@@ -119,7 +119,7 @@ require_once 'site/menu.php';
         <input type="hidden" value="<?php echo $documento->id ?>" name="id" />
       <input type="submit" class="btn btn-default" name="guardar" value="Guardar" />
       <input type="button" class="btn btn-default" name="cancelar" value="Cancelar" onclick="location.href='index.php?controller=Bandejas&action=salida'" />
-      <input type="button" class="btn btn-default" name="borrar" value="Eliminar" id="delete" onclick="location.href='index.php?controller=documento&action=borrarcarta&id=<?php echo $documento->id?>'" />
+      <input type="button" class="btn btn-default" name="borrar" value="Eliminar" id="delete" onclick="location.href='index.php?controller=documento&action=borrardocumento&id=<?php echo $documento->id?>'" />
     </div>
   </div>
 </div>
